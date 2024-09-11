@@ -1,0 +1,52 @@
+<div
+    style="
+        display: flex;
+        position: relative;
+        width: 100%;
+        justify-content: center;
+    "
+>
+    <div
+        style="
+            margin-top: 20px;
+            width: 800px;
+            display: flex;
+            position: relative;
+            justify-content: start;
+            align-items: center;
+            flex-direction: column;
+            background-color: floralwhite;
+        "
+    >
+    <div>
+        <img src="{{ this.landmark.url }}" alt="image" width="800px">
+    </div>
+    <div style="display: flex; position: relative; flex-direction: column;">
+        <div style="margin-left: 20px;">
+            <span style="font-size: 30px;"> {{this.landmark.name}} </span>
+        </div>
+        <div style="margin-left: 20px;">
+            {{this.landmark.country}}
+        </div>
+        <div style="margin-left: 20px;">
+            {{this.landmark.detail}}
+        </div><br>
+        <div>
+            <button
+                mat-raised-button
+                color="primary"
+                style="
+                    margin-left: 10px;
+                    height: 30px;
+                    font-family: 'Prompt', sans-serif;
+                "
+
+                routerLink=".."
+                (click)="back()"
+            >
+                ย้อนกลับ
+            </button>
+        </div>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,145 @@
+<div
+style="
+    display: flex;
+    position: relative;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+"   
+>
+    <mat-label>หมายเลขสถานที่</mat-label>      
+    <input
+        #id
+        matInput
+        type="number"
+        style="
+            margin-left: 10px;
+            width: 50px;
+            height: 30px;
+        "
+        (keydown.enter)="Search(id.value)"
+    >  
+    <button 
+        mat-raised-button
+        color="primary"
+        style="
+            margin-left: 10px;
+            height: 30px;
+            font-family: 'Prompt', sans-serif;
+        "
+        (click)="Search(id.value)"
+    >
+        ค้นหา
+    </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <mat-label>ค้นหาด้วยชื่อ</mat-label>      
+    <input
+        #name
+        matInput
+        type="text"
+        style="
+            margin-left: 10px;
+            width: 50px;
+            height: 30px;
+        "
+         (keydown.enter)="SearchName(name.value)"
+    >  
+    <button 
+        mat-raised-button
+        color="primary"
+        style="
+            margin-left: 10px;
+            height: 30px;
+            font-family: 'Prompt', sans-serif;
+        "
+        (click)="SearchName(name.value)"
+    >
+        ค้นหา
+    </button>
+
+    <mat-label style="margin-left: 100px;">เลือกประเทศ</mat-label>&nbsp;
+    <select name="country" style="margin-left: 10; height: 30px;"
+        [(ngModel)]="country" (ngModelChange)="searchByCountry()"
+    >
+    <option selected> {{ this.countries[0] }} </option>
+    <option> {{ this.countries[1] }} </option>
+    <option> {{ this.countries[2] }} </option>
+    </select>
+</div>
+<div 
+    style="
+        display: flex;
+        position: relative;
+        width: 100%;
+        justify-content: center;
+    "
+    *ngIf="this.isMultiple == false; else showMultiple"
+>
+    <div
+        style="
+            margin-top: 20px;
+            display: flex;
+            position: relative;
+            justify-content: start;
+            margin-left: 200px;
+            margin-right: 200px;
+            background-color: floralwhite;
+        "    
+    >
+        <div class="grow" (click)="selectCountry(this.landmark)">
+            <img src="{{ this.landmark.url }}" alt="image" width="400px">
+        </div>
+        <div style="display: flex; position: relative; flex-direction: column;">
+            <div style="margin-left: 20px;">
+                <span style="font-size: 30px;"> {{this.landmark.name}} </span>
+            </div>
+            <div style="margin-left: 20px;">
+                {{ this.landmark.country }}
+            </div>
+            <div style="margin-left: 20px;">
+                {{ this.landmark.detail }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ส่วนที่ สอง -->
+<ng-template #showMultiple>
+    <div 
+        style="
+            display: flex;
+            position: relative;
+            width: 100%;
+            justify-content: center;
+        "
+        *ngFor="let place of this.landmarksByCountry"
+    >
+        <div
+            style="
+                margin-top: 20px;
+                display: flex;
+                position: relative;
+                justify-content: start;
+                margin-left: 200px;
+                margin-right: 200px;
+                background-color: floralwhite;
+            "    
+        >
+            <div class="grow" (click)="selectCountry(place)">
+                <img src="{{ place.url }}" alt="image" width="400px">
+            </div>
+            <div style="display: flex; position: relative; flex-direction: column;">
+                <div style="margin-left: 20px;">
+                    <span style="font-size: 30px;"> {{place.name}} </span>
+                </div>
+                <div style="margin-left: 20px;">
+                    {{ place.country }}
+                </div>
+                <div style="margin-left: 20px;">
+                    {{ place.detail }}
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
